@@ -1,0 +1,148 @@
+<!-- @author :- Sony
+# Please don't copy the code without my permission
+# Upvote only if you like 
+# Also do give me your suggestions in the comment section
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>To-do List</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+</head>
+
+<style>
+    body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        padding: 3%;
+        background: #DBE2EF;
+        color: #112D4E;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    #todo-heading {
+        font-size: 2.5rem;
+        padding: 1%;
+    }
+
+    .form {
+        width: 80%;
+    }
+
+    .list {
+        width: 80%;
+    }
+
+    .submit-btn {
+        background: #112D4E;
+        color: #F9F7F7;
+        border: none;
+    }
+
+    .delete {
+        background: #3F72AF;
+        color: #F9F7F7;
+        border: none;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    li {
+        cursor: pointer;
+    }
+
+    .completed {
+        text-decoration: line-through;
+    }
+
+    .completed:hover {
+        text-decoration: line-through;
+    }
+</style>
+
+<body>
+    <h1 id="todo-heading">My Todo List</h1>
+
+    <form class="form">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Task" aria-label="Recipient's username"
+                aria-describedby="button-addon2" id="item" autocomplete="off">
+            <div class="input-group-append">
+                <button class="submit-btn btn" type="submit" id="button-addon2">Add</button>
+            </div>
+        </div>
+    </form>
+
+    <ul class="list list-group">
+    </ul>
+
+    <script>
+        var form = document.querySelector('.form');
+        var itemList = document.querySelector('.list');
+        var input = document.querySelector('input');
+
+        form.addEventListener('submit', addItem);
+        itemList.addEventListener('click', deleteItem);
+
+        function addItem(e) {
+            e.preventDefault();
+
+            var newItem = document.querySelector('#item').value;
+            var li = document.createElement('li');
+
+            if (newItem === "") {
+                alert("Please enter you task");
+            }
+
+            else {
+                li.className = 'list-group-item';
+                li.appendChild(document.createTextNode(newItem));
+                var deleteBtn = document.createElement('button');
+                deleteBtn.className = 'btn float-right delete';
+                deleteBtn.appendChild(document.createTextNode('x'));
+                li.appendChild(deleteBtn);
+
+                itemList.appendChild(li);
+            }
+
+            input.value = "";
+        }
+
+        function deleteItem(e) {
+            var item = e.target;
+            var li = e.target.parentElement;
+
+            if (e.target.classList.contains('delete')) {
+                itemList.removeChild(li);
+            }
+            else if(item.classList[0] === "list-group-item"){
+                item.classList.toggle("completed");
+            }
+        }
+
+    </script>
+</body>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
+
+</html>
